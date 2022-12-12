@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { URL_PRODUCT_CREATE } from "../../../middleware/environment";
+import { URL_PRODUCT } from "../../../middleware/environment";
 
 export const CreateProduct = () => {
   const [product, setProduct] = useState({
@@ -30,20 +30,20 @@ export const CreateProduct = () => {
     console.log(event.target.value);
     setProduct({
       ...product,
-      price: event.target.value,
+      price: parseInt(event.target.value),
     });
   };
 
   let formData = {
-    name: "string",
-    description: "string",
-    price: 0,
+    name: product.name,
+    description: product.description,
+    price: product.price,
   };
 
   const SubmitProduct = (event) => {
     event.preventDefault();
 
-    axios.post(`${URL_PRODUCT_CREATE}`, formData).then((response) => {
+    axios.post(`${URL_PRODUCT}`, formData).then((response) => {
       console.log(response);
     });
   };
